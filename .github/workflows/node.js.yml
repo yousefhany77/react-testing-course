@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -23,7 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test:ci
-      - run: npm run build
+      - run: yarn install
+      - run: yarn install
+      - run: yarn test:ci
+      - run: yarn start || true
